@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe ActionView::Helpers::JqueryMobileHelper, :type => :helper do
+describe JqueryMobileHelper, :type => :helper do
 	describe "mobile page" do
 		it "should output data-role pages" do
 		 	helper.page() do

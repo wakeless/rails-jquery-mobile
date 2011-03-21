@@ -1,8 +1,9 @@
 require "action_view"
+
 module ActionView
 	module Helpers
 		module TagHelper
-			ATTRIBUTES = [:theme, :collapsed, :transition, :direction, :ajax]
+			ATTRIBUTES = [:theme, :collapsed, :transition, :direction, :ajax, :role, :icon]
 			
 			def content_tag_with_mobile(name, content_or_options_with_block = nil, options = nil, escape = true, &block)
 				if block_given? 
@@ -31,44 +32,44 @@ module ActionView
 				return options
 			end
 		end
-  		module JqueryMobileHelper
-			
-			
-			[:page, :navbar, :content, :footer, :header, :collapsible].each do |name|
-				class_eval "def #{name} (options = {}, &content)
-					mobile_div('#{name}', options) do
-						yield content
-					end
-			 	end"
+	end
+end
+
+module JqueryMobileHelper
+	[:page, :navbar, :content, :footer, :header, :collapsible].each do |name|
+		class_eval "def #{name} (options = {}, &content)
+			mobile_div('#{name}', options) do
+				yield content
 			end
-			
-			def listview(options = {})
-				mobile_tag :ul, {"data-role" => "listview", "data-theme" => "g"},options do
-					yield if block_given?
-				end
-			end
-			
-			def numberedlist(options)
-				mobile_tag :ol, {"data-role" => "listview", "data-theme" => "g"}, options do
-					yield if block_given?
-				end
-			end
-			
-			protected
-			
-			
-			def mobile_tag(tagname, default = {}, options = {})
-				options = mobile_parse_options options
-				content_tag tagname, default.merge(options) do
-					yield if block_given?
-				end
-			end
-			
-			def mobile_div(role, options = {}, &block)
-				content_tag(:div, options.merge("data-role" => role)) do
-					yield if block_given?
-				end
-			end
+	 	end"
+	end
+	
+	def listview(options = {})
+		mobile_tag :ul, {:role => "listview", :theme => "g"},options do
+			yield if block_given?
 		end
 	end
+	
+	def numberedlist(options)
+		mobile_tag :ol, {:role => "listview", :theme => "g"}, options do
+			yield if block_given?
+		end
+	end
+	
+	protected
+	
+	
+	def mobile_tag(tagname, default = {}, options = {})
+		content_tag tagname, default.merge(options) do
+			yield if block_given?
+		end
+	end
+	
+	def mobile_div(role, options = {}, &block)
+		content_tag(:div, options.merge(:role => role)) do
+			yield if block_given?
+		end
+	end
+	
+	ActionView::Base.send :include, JqueryMobileHelper
 end
