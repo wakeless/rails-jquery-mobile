@@ -16,9 +16,12 @@ data-roles. The helpers are:
 
 
 Secondly the helpers overwrites the builtin content_tag and tag functions and rewrites the related attributes to data-
-attributes. The attributes which it rewrites are
-* theme -> data-theme
-* collapsed -> data-collapsed
-* transistion -> data-transition
-* direction -> data-direction
-* ajax -> data-ajax
+attributes. The attributes which it rewrites are:
+ * theme -> data-theme
+ * collapsed -> data-collapsed
+ * transistion -> data-transition
+ * direction -> data-direction
+ * ajax -> data-ajax
+ * role -> data-role
+ * icon -> data-icon
+ * position -> data-position
