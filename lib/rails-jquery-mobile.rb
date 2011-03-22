@@ -3,7 +3,7 @@ require "action_view"
 module ActionView
 	module Helpers
 		module TagHelper
-			ATTRIBUTES = [:theme, :collapsed, :transition, :direction, :ajax, :role, :icon, :position]
+			ATTRIBUTES = [:theme, :collapsed, :transition, :direction, :ajax, :role, :icon, :position, :inset]
 			
 			def content_tag_with_mobile(name, content_or_options_with_block = nil, options = nil, escape = true, &block)
 				if block_given? 
